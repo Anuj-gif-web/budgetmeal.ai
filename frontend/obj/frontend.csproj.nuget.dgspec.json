@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/Users/anuj/Projects/budgetmeal.ai/frontend/frontend.csproj": {}
+    "C:\\Projects\\budgetmeal.ai\\frontend\\frontend.csproj": {}
   },
   "projects": {
-    "/Users/anuj/Projects/budgetmeal.ai/frontend/frontend.csproj": {
+    "C:\\Projects\\budgetmeal.ai\\frontend\\frontend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/anuj/Projects/budgetmeal.ai/frontend/frontend.csproj",
+        "projectUniqueName": "C:\\Projects\\budgetmeal.ai\\frontend\\frontend.csproj",
         "projectName": "frontend",
-        "projectPath": "/Users/anuj/Projects/budgetmeal.ai/frontend/frontend.csproj",
-        "packagesPath": "/Users/anuj/.nuget/packages/",
-        "outputPath": "/Users/anuj/Projects/budgetmeal.ai/frontend/obj/",
+        "projectPath": "C:\\Projects\\budgetmeal.ai\\frontend\\frontend.csproj",
+        "packagesPath": "C:\\Users\\geete\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\budgetmeal.ai\\frontend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/anuj/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\geete\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -88,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.412/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.412/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
