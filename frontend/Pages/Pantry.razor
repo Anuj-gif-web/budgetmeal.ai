@@ -1,4 +1,5 @@
 @page "/pantry"
+@inject LocalStorageService Storage
 
 <h3>Your Pantry</h3>
 
@@ -30,17 +31,33 @@ else
     private string newIngredient = string.Empty;
     private List<string> pantryItems = new();
 
-    private void AddIngredient()
+    private async Task AddIngredient()
     {
         if (!string.IsNullOrWhiteSpace(newIngredient))
         {
             pantryItems.Add(newIngredient.Trim());
             newIngredient = string.Empty;
+            await SavePantry();
         }
     }
 
-    private void RemoveIngredient(string item)
+    private async Task RemoveIngredient(string item)
     {
         pantryItems.Remove(item);
+        await SavePantry();
+    }
+
+    private async Task SavePantry()
+    {
+        await Storage.SaveAsync("pantryItems", pantryItems);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var saved = await Storage.LoadAsync<List<string>>("pantryItems");
+        if (saved is not null)
+        {
+            pantryItems = saved;
+        }
     }
 }
