@@ -1,5 +1,6 @@
 @page "/recipes"
 @inject LocalStorageService Storage
+@inject HttpClient Http
 
 <h3>Your Personalized Meal Plan</h3>
 
@@ -83,14 +84,31 @@ else
         hasGenerated = false;
         mockRecipes.Clear();
 
-        await Task.Delay(1000); // simulate "loading" or API call
-
-        mockRecipes = new List<Recipe>
+        var request = new
         {
-            new Recipe { Title = "Tomato Rice Bowl", Ingredients = ["rice", "tomato", "salt"], Cost = 2.3M },
-            new Recipe { Title = "Veggie Stir Fry", Ingredients = ["rice", "onion", "pepper"], Cost = 3.0M },
-            new Recipe { Title = "Budget Pasta", Ingredients = ["pasta", "oil", "garlic"], Cost = 1.8M }
+            budget = weeklyBudget,
+            diet = dietType,
+            pantry = pantryItems
         };
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("generate-meal-plan", request);
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadFromJsonAsync<List<Recipe>>();
+                if (data != null)
+                    mockRecipes = data;
+            }
+            else
+            {
+                Console.WriteLine("API Error: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Exception: " + ex.Message);
+        }
 
         isGenerating = false;
         hasGenerated = true;
