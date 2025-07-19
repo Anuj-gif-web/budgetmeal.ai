@@ -27,6 +27,11 @@ else
     <p><em>Your pantry is currently empty.</em></p>
 }
 
+@if (pantryItems.Any())
+{
+    <button class="btn btn-outline-danger mt-3" @onclick="ClearPantry">Clear Pantry</button>
+}
+
 @code {
     private string newIngredient = string.Empty;
     private List<string> pantryItems = new();
@@ -60,4 +65,14 @@ else
             pantryItems = saved;
         }
     }
+
+    private async Task ClearPantry()
+    {
+        pantryItems.Clear();
+        await Storage.RemoveAsync("pantryItems");
+    }
 }
+
+
+
+

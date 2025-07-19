@@ -31,6 +31,8 @@
 
 <button class="btn btn-primary" @onclick="SavePreferences">Save Preferences</button>
 
+<button class="btn btn-outline-danger ms-2" @onclick="ClearPreferences">Clear Preferences</button>
+
 @if (showSavedMessage)
 {
     <div class="alert alert-success mt-3" style="max-width: 400px;">
@@ -68,5 +70,13 @@
     {
         public decimal Budget { get; set; }
         public string Diet { get; set; } = "";
+    }
+
+    private async Task ClearPreferences()
+    {
+        weeklyBudget = 0;
+        dietType = "";
+        await Storage.RemoveAsync("budgetPrefs");
+        showSavedMessage = false;
     }
 }
