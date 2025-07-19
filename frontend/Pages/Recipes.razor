@@ -1,0 +1,111 @@
+@page "/recipes"
+@inject LocalStorageService Storage
+
+<h3>Your Personalized Meal Plan</h3>
+
+@if (!loaded)
+{
+    <p>Loading your data...</p>
+}
+else if (pantryItems.Count == 0 || weeklyBudget == 0)
+{
+    <div class="alert alert-warning" style="max-width: 500px;">
+        Please add pantry items and set your budget before generating a meal plan.
+    </div>
+}
+else
+{
+    <div class="mb-4">
+        <strong>Budget:</strong> $@weeklyBudget<br />
+        <strong>Diet:</strong> @dietType<br />
+        <strong>Pantry:</strong> @string.Join(", ", pantryItems)
+    </div>
+
+    <button class="btn btn-primary mb-3" @onclick="GenerateMealPlan" disabled="@isGenerating">
+        @if (isGenerating)
+        {
+            <span>Generating...</span>
+        }
+        else
+        {
+            <span>Generate Meal Plan</span>
+        }
+    </button>
+
+    @if (hasGenerated && mockRecipes.Count > 0)
+    {
+        <h5>Recommended Meals:</h5>
+        <ul class="list-group" style="max-width: 500px;">
+            @foreach (var recipe in mockRecipes)
+            {
+                <li class="list-group-item">
+                    <strong>@recipe.Title</strong><br />
+                    <em>Ingredients:</em> @string.Join(", ", recipe.Ingredients)<br />
+                    <em>Estimated cost:</em> $@recipe.Cost
+                </li>
+            }
+        </ul>
+    }
+}
+
+@code {
+    private decimal weeklyBudget;
+    private string dietType = "";
+    private List<string> pantryItems = new();
+    private bool loaded = false;
+    private bool isGenerating = false;
+    private bool hasGenerated = false;
+
+    private List<Recipe> mockRecipes = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var budgetData = await Storage.LoadAsync<BudgetData>("budgetPrefs");
+        var pantryData = await Storage.LoadAsync<List<string>>("pantryItems");
+
+        if (budgetData is not null)
+        {
+            weeklyBudget = budgetData.Budget;
+            dietType = budgetData.Diet;
+        }
+
+        if (pantryData is not null)
+        {
+            pantryItems = pantryData;
+        }
+
+        loaded = true;
+    }
+
+    private async Task GenerateMealPlan()
+    {
+        isGenerating = true;
+        hasGenerated = false;
+        mockRecipes.Clear();
+
+        await Task.Delay(1000); // simulate "loading" or API call
+
+        mockRecipes = new List<Recipe>
+        {
+            new Recipe { Title = "Tomato Rice Bowl", Ingredients = ["rice", "tomato", "salt"], Cost = 2.3M },
+            new Recipe { Title = "Veggie Stir Fry", Ingredients = ["rice", "onion", "pepper"], Cost = 3.0M },
+            new Recipe { Title = "Budget Pasta", Ingredients = ["pasta", "oil", "garlic"], Cost = 1.8M }
+        };
+
+        isGenerating = false;
+        hasGenerated = true;
+    }
+
+    private class Recipe
+    {
+        public string Title { get; set; } = "";
+        public List<string> Ingredients { get; set; } = new();
+        public decimal Cost { get; set; }
+    }
+
+    private class BudgetData
+    {
+        public decimal Budget { get; set; }
+        public string Diet { get; set; } = "";
+    }
+}

@@ -1,0 +1,78 @@
+@page "/pantry"
+@inject LocalStorageService Storage
+
+<h3>Your Pantry</h3>
+
+<p>Add the ingredients you already have:</p>
+
+<div class="input-group mb-3" style="max-width: 400px;">
+    <input @bind="newIngredient" class="form-control" placeholder="e.g. rice, eggs, tomato" />
+    <button class="btn btn-success" @onclick="AddIngredient">Add</button>
+</div>
+
+@if (pantryItems.Any())
+{
+    <ul class="list-group" style="max-width: 400px;">
+        @foreach (var item in pantryItems)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                @item
+                <button class="btn btn-sm btn-outline-danger" @onclick="() => RemoveIngredient(item)">Remove</button>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p><em>Your pantry is currently empty.</em></p>
+}
+
+@if (pantryItems.Any())
+{
+    <button class="btn btn-outline-danger mt-3" @onclick="ClearPantry">Clear Pantry</button>
+}
+
+@code {
+    private string newIngredient = string.Empty;
+    private List<string> pantryItems = new();
+
+    private async Task AddIngredient()
+    {
+        if (!string.IsNullOrWhiteSpace(newIngredient))
+        {
+            pantryItems.Add(newIngredient.Trim());
+            newIngredient = string.Empty;
+            await SavePantry();
+        }
+    }
+
+    private async Task RemoveIngredient(string item)
+    {
+        pantryItems.Remove(item);
+        await SavePantry();
+    }
+
+    private async Task SavePantry()
+    {
+        await Storage.SaveAsync("pantryItems", pantryItems);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var saved = await Storage.LoadAsync<List<string>>("pantryItems");
+        if (saved is not null)
+        {
+            pantryItems = saved;
+        }
+    }
+
+    private async Task ClearPantry()
+    {
+        pantryItems.Clear();
+        await Storage.RemoveAsync("pantryItems");
+    }
+}
+
+
+
+
