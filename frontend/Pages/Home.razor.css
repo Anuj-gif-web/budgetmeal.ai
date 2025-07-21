@@ -1,0 +1,74 @@
+/* Pages/Home.razor.css */
+
+/* Hero container with animated gradient */
+.home-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 3.5rem);
+    text-align: center;
+    color: #fff;
+  
+    /* Animated blue↔purple gradient */
+    background: linear-gradient(
+      -45deg,
+      #052767 0%,
+      #3a0647 25%,
+      #052767 50%,
+      #3a0647 75%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  /* Headline fade-in */
+  .home-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: fadeInDown 1s ease-out forwards;
+  }
+  
+  /* Subhead fade-in (delayed) */
+  .home-hero p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+    opacity: 0;
+  }
+  
+  /* CTA button */
+  .btn-cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #006644;
+    background: #fff;
+    border-radius: 0.375rem;
+    text-decoration: none;
+    transform: scale(0.95);
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 1s forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .btn-cta:hover {
+    transform: scale(1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* Keyframes */
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  

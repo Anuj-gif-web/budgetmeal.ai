@@ -30,7 +30,7 @@ class Recipe(BaseModel):
 
 @router.post("/generate-meal-plan", response_model=List[Recipe])
 def generate_meal_plan(request: MealPlanRequest):
-    model = genai.GenerativeModel("models/gemini-1.5-flash")  # ✅ FREE tier model
+    model = genai.GenerativeModel("models/gemini-1.5-flash")  
 
     # Prompt to guide Gemini
     prompt = (
