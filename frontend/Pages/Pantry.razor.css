@@ -1,0 +1,143 @@
+/* — Full-bleed animated gradient background — */
+.pantry-page {
+    position: absolute;
+    top: 3.5rem;   /* under navbar */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    background: linear-gradient(
+      -45deg,
+      #052767 0%,
+      #3a0647 25%,
+      #052767 50%,
+      #3a0647 75%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+  }
+  
+  /* keyframes */
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* container card */
+  .pantry-container {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    margin-top: 1rem;
+  }
+  
+  /* headings & paragraphs */
+  .pantry-container h3 {
+    margin-top: 0;
+    font-size: 1.75rem;
+  }
+  .pantry-container p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  
+  /* input row */
+  .pantry-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .pantry-input input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 1rem;
+  }
+  .pantry-input input::placeholder {
+    color: #eee;
+  }
+  .btn-add {
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+  
+  /* pantry list */
+  .pantry-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+  .pantry-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .pantry-list li span {
+    flex: 1;
+  }
+  
+  /* remove button */
+  .btn-remove {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .btn-remove:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  
+  /* clear pantry button */
+  .btn-clear {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .btn-clear:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  
+  /* empty state */
+  .pantry-empty {
+    text-align: center;
+    opacity: 0.8;
+  }
+  

@@ -1,16 +1,18 @@
 @page "/budget"
 @inject LocalStorageService Storage
 
-<h3>Budget & Preferences</h3>
+<div class="budget-page">
+  <div class="budget-container">
+    <h3>Budget & Preferences</h3>
 
-<div class="mb-3" style="max-width: 400px;">
-    <label for="budgetInput" class="form-label">Weekly Budget ($):</label>
-    <input type="number" id="budgetInput" class="form-control" @bind="weeklyBudget" />
-</div>
+    <div class="field-group">
+      <label for="budgetInput">Weekly Budget ($):</label>
+      <input type="number" id="budgetInput" @bind="weeklyBudget" />
+    </div>
 
-<div class="mb-3" style="max-width: 400px;">
-    <label for="dietSelect" class="form-label">Dietary Preference:</label>
-    <select id="dietSelect" class="form-select" @bind="dietType">
+    <div class="field-group">
+      <label for="dietSelect">Dietary Preference:</label>
+      <select id="dietSelect" @bind="dietType">
         <option value="">None</option>
         <option>Vegetarian</option>
         <option>Vegan</option>
@@ -26,19 +28,22 @@
         <option>Gluten-Free</option>
         <option>Halal</option>
         <option>Kosher</option>
-    </select>
-</div>
-
-<button class="btn btn-primary" @onclick="SavePreferences">Save Preferences</button>
-
-<button class="btn btn-outline-danger ms-2" @onclick="ClearPreferences">Clear Preferences</button>
-
-@if (showSavedMessage)
-{
-    <div class="alert alert-success mt-3" style="max-width: 400px;">
-        Preferences saved successfully!
+      </select>
     </div>
-}
+
+    <div class="btn-group">
+      <button class="btn-save" @onclick="SavePreferences">Save Preferences</button>
+      <button class="btn-clear" @onclick="ClearPreferences">Clear Preferences</button>
+    </div>
+
+    @if (showSavedMessage)
+    {
+      <div class="alert-saved">
+        Preferences saved successfully!
+      </div>
+    }
+  </div>
+</div>
 
 @code {
     private decimal weeklyBudget = 0;
@@ -47,11 +52,7 @@
 
     private async Task SavePreferences()
     {
-        var data = new BudgetData
-        {
-            Budget = weeklyBudget,
-            Diet = dietType
-        };
+        var data = new BudgetData { Budget = weeklyBudget, Diet = dietType };
         await Storage.SaveAsync("budgetPrefs", data);
         showSavedMessage = true;
     }
@@ -66,12 +67,6 @@
         }
     }
 
-    private class BudgetData
-    {
-        public decimal Budget { get; set; }
-        public string Diet { get; set; } = "";
-    }
-
     private async Task ClearPreferences()
     {
         weeklyBudget = 0;
@@ -79,5 +74,6 @@
         await Storage.RemoveAsync("budgetPrefs");
         showSavedMessage = false;
     }
-    
+
+    private class BudgetData { public decimal Budget { get; set; } public string Diet { get; set; } = ""; }
 }
