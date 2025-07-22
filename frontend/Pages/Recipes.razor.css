@@ -1,0 +1,120 @@
+/* — Full-bleed animated gradient background — */
+.recipes-page {
+    position: relative;
+    left: 50%; right: 50%;
+    margin-left: -50vw; margin-right: -50vw;
+    width: 100vw;
+    margin-top: -3.5rem;                  /* tuck under navbar */
+    min-height: calc(100vh + 3.5rem);     /* fill the screen */
+    background: linear-gradient(
+      -45deg,
+      #052767 0%,
+      #3a0647 25%,
+      #052767 50%,
+      #3a0647 75%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    padding: 3.5rem 2rem 2rem;            /* account for navbar overlap */
+  }
+  
+  /* Keyframes for gradient animation */
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* — Make inner hero transparent so gradient shows through — */
+  .recipes-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: transparent;
+    margin-bottom: 2rem;
+  }
+  .hero-text h1,
+  .hero-text p {
+    color: #fff;
+  }
+  
+  /* — Generate button pinned right — */
+  .btn-action {
+    margin-left: auto;
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    display: flex; align-items: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-action:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+  
+  /* — Loading spinner — */
+  .recipes-loading {
+    display: flex; justify-content: center; margin: 2rem 0;
+  }
+  .spin {
+    animation: spin 1s linear infinite;
+    font-size: 2rem;
+    color: #fff;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  
+  /* — Alerts override — */
+  .recipes-alert {
+    background: rgba(255,255,255,0.2) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255,255,255,0.5) !important;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+  
+  /* — Plan details panels — */
+  .plan-details {
+    display: flex; gap: 2rem; justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .plan-details div {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* — Recipe cards — */
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+    gap: 1.5rem;
+    padding: 0;
+  }
+  .recipe-card {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .recipe-card:hover {
+    transform: translateY(-5px) scale(0.98);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+  .recipe-card h3,
+  .recipe-card .cost,
+  .recipe-card li {
+    color: #fff;
+  }
+  

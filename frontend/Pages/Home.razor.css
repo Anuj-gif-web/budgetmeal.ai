@@ -1,19 +1,24 @@
-/* Pages/Home.razor.css */
-
-/* 1. Hero wrapper */
+/* full-width, edge-to-edge hero, pulled up under navbar */
 .home-hero {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+    margin-top: -1.5rem; /* lifts it under the navbar’s mt-4 */
+  
+    /* Hero layout */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: calc(100vh - 3.5rem);
     text-align: center;
-    margin: 0 auto;
-    padding: 0 1rem;
     color: #fff;
     font-family: 'Poppins', sans-serif;
   
-    /* deep-blue ↔ rich-purple animated gradient */
+    /* Animated blue↔purple gradient */
     background: linear-gradient(
       -45deg,
       #052767 0%,
@@ -25,7 +30,7 @@
     animation: gradientShift 15s ease infinite;
   }
   
-  /* 2. Headline */
+  /* Headline */
   .home-hero h1 {
     font-size: 4rem;
     font-weight: 700;
@@ -36,7 +41,7 @@
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
   }
   
-  /* 3. Subhead */
+  /* Subhead */
   .home-hero p {
     font-size: 1.25rem;
     font-weight: 400;
@@ -46,7 +51,7 @@
     animation: fadeInUp 1s ease-out 0.5s forwards;
   }
   
-  /* 4. CTA button */
+  /* CTA button */
   .btn-cta {
     display: inline-block;
     padding: 0.75rem 2rem;
@@ -69,7 +74,7 @@
     box-shadow: 0 15px 25px rgba(0,0,0,0.3);
   }
   
-  /* 5. Keyframes */
+  /* Animations */
   @keyframes gradientShift {
     0%   { background-position: 0% 50%; }
     50%  { background-position: 100% 50%; }

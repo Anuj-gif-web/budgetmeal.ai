@@ -2,52 +2,58 @@
 @inject LocalStorageService Storage
 @inject HttpClient Http
 
-<h3>Your Personalized Meal Plan</h3>
-
-@if (!loaded)
-{
-    <p>Loading your data...</p>
-}
-else if (pantryItems.Count == 0 || weeklyBudget == 0)
-{
-    <div class="alert alert-warning" style="max-width: 500px;">
-        Please add pantry items and set your budget before generating a meal plan.
+<div class="recipes-page">
+  <div class="recipes-hero">
+    <div class="hero-text">
+      <h1 tabindex="0">Your Personalized Meal Plan</h1>
+      <p>Based on your pantry &amp; budget</p>
     </div>
-}
-else
-{
-    <div class="mb-4">
-        <strong>Budget:</strong> $@weeklyBudget<br />
-        <strong>Diet:</strong> @dietType<br />
-        <strong>Pantry:</strong> @string.Join(", ", pantryItems)
-    </div>
-
-    <button class="btn btn-primary mb-3" @onclick="GenerateMealPlan" disabled="@isGenerating">
-        @if (isGenerating)
-        {
-            <span>Generating...</span>
-        }
-        else
-        {
-            <span>Generate Meal Plan</span>
-        }
+    <button class="btn-action" @onclick="GenerateMealPlan" disabled="@isGenerating">
+      <span class="oi oi-magic-wand me-1"></span>
+      @(isGenerating ? "Generating..." : "Generate Plan")
     </button>
+  </div>
+
+  @if (!loaded)
+  {
+    <div class="recipes-loading">
+      <span class="oi oi-loop-circular spin" aria-hidden="true"></span>
+    </div>
+  }
+  else if (pantryItems.Count == 0 || weeklyBudget == 0)
+  {
+    <div class="alert alert-warning recipes-alert">
+      Please add pantry items and set your budget before generating a meal plan.
+    </div>
+  }
+  else
+  {
+    <div class="plan-details">
+      <div><strong>Budget:</strong> $@weeklyBudget</div>
+      <div><strong>Diet:</strong> @dietType</div>
+      <div><strong>Pantry:</strong> @string.Join(", ", pantryItems)</div>
+    </div>
 
     @if (hasGenerated && mockRecipes.Count > 0)
     {
-        <h5>Recommended Meals:</h5>
-        <ul class="list-group" style="max-width: 500px;">
-            @foreach (var recipe in mockRecipes)
-            {
-                <li class="list-group-item">
-                    <strong>@recipe.Title</strong><br />
-                    <em>Ingredients:</em> @string.Join(", ", recipe.Ingredients)<br />
-                    <em>Estimated cost:</em> $@recipe.Cost
-                </li>
-            }
-        </ul>
+      <div class="recipes-grid">
+        @foreach (var recipe in mockRecipes)
+        {
+          <div class="recipe-card">
+            <h3>@recipe.Title</h3>
+            <p class="cost">$@recipe.Cost</p>
+            <ul>
+              @foreach (var ing in recipe.Ingredients)
+              {
+                <li>@ing</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
     }
-}
+  }
+</div>
 
 @code {
     private decimal weeklyBudget;
@@ -56,7 +62,6 @@ else
     private bool loaded = false;
     private bool isGenerating = false;
     private bool hasGenerated = false;
-
     private List<Recipe> mockRecipes = new();
 
     protected override async Task OnInitializedAsync()
@@ -100,15 +105,8 @@ else
                 if (data != null)
                     mockRecipes = data;
             }
-            else
-            {
-                Console.WriteLine("API Error: " + response.StatusCode);
-            }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Exception: " + ex.Message);
-        }
+        catch { /* handle errors */ }
 
         isGenerating = false;
         hasGenerated = true;
@@ -120,10 +118,5 @@ else
         public List<string> Ingredients { get; set; } = new();
         public decimal Cost { get; set; }
     }
-
-    private class BudgetData
-    {
-        public decimal Budget { get; set; }
-        public string Diet { get; set; } = "";
-    }
+    private class BudgetData { public decimal Budget { get; set; } public string Diet { get; set; } = ""; }
 }

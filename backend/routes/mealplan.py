@@ -34,7 +34,7 @@ def generate_meal_plan(request: MealPlanRequest):
 
     # Prompt to guide Gemini
     prompt = (
-        f"Create 3 budget-friendly {request.diet} recipes using only these pantry items: {', '.join(request.pantry)}.\n"
+        f"Create 14 budget-friendly {request.diet} recipes using only these pantry items: {', '.join(request.pantry)}.\n"
         f"Each recipe must include: a title, ingredients used (from pantry), and an estimated cost (under ${request.budget}).\n"
         f"Respond strictly in raw JSON array format (no markdown, no explanation), like:\n"
         f'[{{"title": "...", "ingredients": [...], "cost": ...}}, ...]'
