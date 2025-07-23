@@ -1,4 +1,4 @@
-﻿@* Top horizontal navigation bar *@
+﻿@* NavMenu.razor *@
 <nav class="navbar navbar-expand-lg px-3 nav-modern">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">BudgetMeal.AI</a>
@@ -9,23 +9,23 @@
         <div class="@NavMenuCssClass navbar-collapse">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
-                        <span class="oi oi-home me-1"></span> Home
+                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All" style="color:white">
+                        <span class="oi oi-home me-1"></span> <span style="color:white">Home</span>
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="pantry">
-                        <span class="oi oi-list me-1"></span> Pantry
+                    <NavLink class="nav-link" href="pantry" style="color:white">
+                        <span class="oi oi-list me-1"></span> <span style="color:white">Pantry</span>
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="budget">
-                        <span class="oi oi-dollar me-1"></span> Budget
+                    <NavLink class="nav-link" href="budget" style="color:white">
+                        <span class="oi oi-dollar me-1"></span> <span style="color:white">Budget</span>
                     </NavLink>
                 </li>
                 <li class="nav-item">
-                    <NavLink class="nav-link" href="recipes">
-                        <span class="oi oi-book me-1"></span> Recipes
+                    <NavLink class="nav-link" href="recipes" style="color:white">
+                        <span class="oi oi-book me-1"></span> <span style="color:white">Recipes</span>
                     </NavLink>
                 </li>
             </ul>

@@ -9,10 +9,10 @@
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.4);
     font-family: 'Poppins', sans-serif;
-  }
-  
-  /* 2) Shimmer sweep */
-  .nav-modern::before {
+}
+
+/* 2) Shimmer sweep */
+.nav-modern::before {
     content: "";
     position: absolute;
     top: 0;
@@ -22,44 +22,53 @@
     background: rgba(255,255,255,0.15);
     transform: skewX(-25deg);
     animation: navShine 4s ease-in-out infinite;
-  }
-  
-  /* 3) Brand & toggler above effects */
-  .nav-modern .navbar-brand,
-  .nav-modern .navbar-toggler {
+}
+
+/* 3) Brand & toggler above effects */
+.nav-modern .navbar-brand,
+.nav-modern .navbar-toggler {
     position: relative;
     z-index: 1;
-  }
-  
-  /* 4) Force brand text white */
-  .nav-modern .navbar-brand {
-    color: #fff !important;
-  }
-  .nav-modern .navbar-brand:hover {
-    color: #fff !important;
-  }
-  
-  /* 5) Force all link text white */
-  .nav-modern .navbar-nav .nav-link {
-    color: #fff !important;
+}
+
+/* 4) Force brand text white */
+.nav-modern .navbar-brand {
+    color: #ffffff !important;
+}
+.nav-modern .navbar-brand:hover {
+    color: #ffffff !important;
+}
+
+/* 5) Force all nav link text and icons white */
+.nav-modern .navbar-nav .nav-link {
+    color: #ffffff !important;
     font-weight: 600;
     text-transform: uppercase;
     transition: transform 0.3s ease;
-  }
-  .nav-modern .navbar-nav .nav-link:hover,
-  .nav-modern .navbar-nav .nav-link.active {
-    color: #fff !important;
+    position: relative;
+}
+
+/* Ensures icons and text inside links are white */
+.nav-modern .navbar-nav .nav-link * {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* 6) Active/Hover State */
+.nav-modern .navbar-nav .nav-link:hover,
+.nav-modern .navbar-nav .nav-link.active {
+    color: #ffffff !important;
     transform: translateY(-2px);
-  }
-  
-  /* 6) Force all icons white */
-  .nav-modern .navbar-nav .nav-link .oi,
-  .nav-modern .navbar-toggler-icon {
+}
+
+/* 7) Force all icons white using filter */
+.nav-modern .navbar-nav .nav-link .oi,
+.nav-modern .navbar-toggler-icon {
     filter: brightness(0) invert(1);
-  }
-  
-  /* 7) Gradient underline on hover/active */
-  .nav-modern .navbar-nav .nav-link::after {
+}
+
+/* 8) Gradient underline on hover/active */
+.nav-modern .navbar-nav .nav-link::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -69,27 +78,44 @@
     background: linear-gradient(90deg, #ff512f, #dd2476);
     border-radius: 2px;
     transition: width 0.4s ease, left 0.4s ease;
-  }
-  .nav-modern .navbar-nav .nav-link:hover::after,
-  .nav-modern .navbar-nav .nav-link.active::after {
+}
+.nav-modern .navbar-nav .nav-link:hover::after,
+.nav-modern .navbar-nav .nav-link.active::after {
     width: 100%;
     left: 0;
-  }
-  
-  /* 8) Shimmer keyframes */
-  @keyframes navShine {
+}
+
+/* 9) Shimmer keyframes */
+@keyframes navShine {
     0%   { left: -50%; }
     50%  { left: 150%; }
     100% { left: 150%; }
-  }
-  
-  /* 9) Keep collapse behavior on wide screens */
-  @media (min-width: 641px) {
+}
+
+/* 10) Collapse toggle only for mobile */
+@media (min-width: 641px) {
     .nav-modern .navbar-toggler {
-      display: none;
+        display: none;
     }
     .nav-modern .collapse {
-      display: block !important;
+        display: block !important;
     }
-  }
-  
+}
+
+/* 11) FINAL FORCEFUL OVERRIDE */
+.nav-modern .navbar-nav .nav-link,
+.nav-modern .navbar-nav .nav-link span,
+.nav-modern .navbar-nav .nav-link::after,
+.nav-modern .navbar-nav .nav-item,
+.nav-modern .navbar-nav .nav-item * {
+    color: white !important;
+    fill: white !important;
+}
+
+/* 12) 🔥 Absolute final override for anchor-based nav links */
+.nav-modern a.nav-link,
+.nav-modern a.nav-link:hover,
+.nav-modern a.nav-link.active {
+    color: white !important;
+    fill: white !important;
+}
