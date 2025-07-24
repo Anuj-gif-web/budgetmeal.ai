@@ -55,3 +55,7 @@ htmlcov/
 .DS_Store
 Thumbs.db
 frontend/obj/
+
+# build artifacts
+frontend/bin/
+frontend/obj/
